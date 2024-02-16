@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>User Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form
+    [formGroup]="userForm"
+    style="
+      display: flex;
+      flex-direction: column;
+      /* justify-content: center; */
+      align-items: center;
+      gap: 10px;
+      margin-top: 50px;
+    "
+  >
+    <div>
+      <label>Full Name : </label>
+      <input type="text" formControlName="name" />
+    </div>
+    <div>
+      <label>Age : </label>
+      <input type="number" formControlName="age" />
+    </div>
+    <div>
+      <label>Email : </label>
+      <input type="email" formControlName="email" />
+    </div>
+    <div>
+      <label>Address : </label>
+      <input type="text" formControlName="address" />
+    </div>
+    <ion-button (click)="updateUser()">UPDATE USER</ion-button>
+  </form>
+</ion-content>

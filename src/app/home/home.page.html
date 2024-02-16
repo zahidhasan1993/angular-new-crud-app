@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center"> Crud App </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="margin-top: 40px; width: 100%">
+    <ion-title color="primary" class="ion-text-center">Create A User</ion-title>
+    <div style="margin-top: 40px">
+      <form [formGroup]="userForm" style="
+          display: flex;
+          flex-direction: column;
+          /* justify-content: center; */
+          align-items: center;
+          gap: 10px;
+        ">
+        <div>
+          <label>Full Name : </label>
+          <input type="text" formControlName="name" />
+        </div>
+        <div>
+          <label>Age : </label>
+          <input type="number" formControlName="age" />
+        </div>
+        <div>
+          <label>Email : </label>
+          <input type="email" formControlName="email" />
+        </div>
+        <div>
+          <label>Address : </label>
+          <input type="text" formControlName="address" />
+        </div>
+        <ion-button (click)="addUser()">ADD USER</ion-button>
+      </form>
+    </div>
+    <hr style="border: 1px solid black; margin-top: 20px; margin-bottom: 10px" />
+
+    <div class="ion-text-center">
+      <ion-row>
+        @for (user of allUsers; track $index) {
+        <ion-col size="12" sizeMd="6" sizeLg="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{user?.name}}</ion-card-title>
+              <ion-card-subtitle>{{user?.age}}</ion-card-subtitle>
+              <ion-card-subtitle>{{user?.email}}</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content> {{user?.address}} </ion-card-content>
+
+            <ion-button [routerLink]="['/details', user?.id]">Update User</ion-button>
+            <ion-button (click)="deleteOne(user?.id)">Delete User</ion-button>
+          </ion-card>
+        </ion-col>
+
+        }
+      </ion-row>
+
+    </div>
+    <ion-button (click)="deleteUser()">Delete All</ion-button>
+  </div>
+</ion-content>
