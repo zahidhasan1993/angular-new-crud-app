@@ -12,23 +12,25 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [IonicModule, CommonModule, ReactiveFormsModule],
 })
-export class DetailsPage implements OnInit{
+export class DetailsPage implements OnInit {
   private dataService = inject(ServiceService);
   private router = inject(Router);
-  userDetails : any = {};
-  allUsers : any = []
-  constructor() {
-  }
+  userDetails: any = {};
+  allUsers: any = [];
+
+  constructor() {}
+
   ngOnInit(): void {
-    this.allData()
+    this.allData();
   }
+
   @Input() id: number = 0;
+
   userForm = new FormGroup({
     name: new FormControl(''),
-    age: new FormControl(0),
-    email: new FormControl(''),
-
-    address: new FormControl(''),
+    age: new FormControl(0), 
+    email: new FormControl(''), 
+    address: new FormControl(''), 
   });
 
   async updateUser() {
@@ -36,27 +38,29 @@ export class DetailsPage implements OnInit{
       ...this.userForm.value,
       id: this.id,
     };
-    console.log('send data from update data');
-``
-    await this.dataService.updateData(data);
 
-    console.log('updated data');
-
-    this.router.navigate(['/']);
-
-    // console.log(this.item);
+    try {
+      await this.dataService.updateData(data);
+      console.log('Updated data');
+      this.router.navigate(['/']);
+    } catch (error) {
+      console.error('Error updating data:', error);
+    
+    }
   }
 
   async allData() {
     this.allUsers = await this.dataService.getAllData();
 
-    console.log(this.allUsers);
-    const details = this.allUsers.filter((u:any) => u.id.toString() === this.id.toString());
+    const details = this.allUsers.filter((u: any) => u.id.toString() === this.id.toString());
 
-    this.userDetails = details[0];
-    console.log('from details page :',this.userDetails);
-    
-    
-    
+    if (details.length > 0) { 
+      this.userDetails = details[0];
+      this.userForm.patchValue(this.userDetails); 
+    } else {
+      console.log("some error!");
+      
+     
+    }
   }
 }
