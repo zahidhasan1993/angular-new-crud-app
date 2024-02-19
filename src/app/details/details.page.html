@@ -5,7 +5,25 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form
+  <ion-card> 
+    <ion-card-content>
+      <form [formGroup]="userForm" style="
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        gap: 10px;
+      ">
+
+      <ion-input label="Full Name : " class="border border-black" formControlName="name" placeholder={{userDetails.name}}></ion-input>
+      <ion-input label="Number : " class="border border-black" formControlName="age" placeholder={{userDetails.age}}></ion-input>
+      <ion-input label="Email : " class="border border-black" formControlName="email" placeholder={{userDetails.email}}></ion-input>
+      <ion-input label="Address : " class="border border-black" formControlName="address" placeholder={{userDetails.address}}></ion-input>
+      <ion-button (click)="updateUser()">UPDATE USER</ion-button>
+    </form>
+    </ion-card-content>
+  </ion-card>
+  <!-- <form
     [formGroup]="userForm"
     style="
       display: flex;
@@ -33,5 +51,5 @@
       <input type="text" formControlName="address" />
     </div>
     <ion-button (click)="updateUser()">UPDATE USER</ion-button>
-  </form>
+  </form> -->
 </ion-content>
